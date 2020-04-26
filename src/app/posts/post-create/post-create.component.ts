@@ -1,15 +1,20 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from "@angular/core";
 
 @Component({
-    selector: 'app-post-create',
-    templateUrl: './post-create.component.html'
+  selector: "app-post-create",
+  templateUrl: "./post-create.component.html",
+  styleUrls: ["./post-create.component.css"]
 })
 export class PostCreateComponent {
+  enteredTitle = "";
+  enteredContent = "";
+  @Output() postCreated = new EventEmitter();
 
-    enteredValue ='';
-    newPost = 'No Content';
-    //A fuction that will learn when someone click the button in html file(action)
-    onAddPost(postInput: HTMLTextAreaElement){
-        this.newPost = this.enteredValue;
-    }
+  onAddPost() {
+    const post = {
+      title: this.enteredTitle,
+      content: this.enteredContent
+    };
+    this.postCreated.emit(post);
+  }
 }
