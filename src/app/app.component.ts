@@ -8,6 +8,8 @@ import { Post } from './posts/post.model';
 })
 export class AppComponent {
   title = 'main-api';
+storedPosts =[];
+  
   onPostAdded(post) {
     this.storedPosts.push(post);
   }

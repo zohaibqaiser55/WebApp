@@ -8,6 +8,6 @@ import { Post} from "../post.model"
 })
 export class PostListComponent {
   
-  
+
   @Input() posts: Post[]= [];
 }
