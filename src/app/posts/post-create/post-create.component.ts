@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 
 
 import { PostsService } from "../post.service";
+import { format } from 'path';
 
 
 @Component({
@@ -21,12 +22,14 @@ export class PostCreateComponent {
 
   constructor(public postsService: PostsService) {}
 
-  onAddPost(from: NgForm) {
-    //some basic HTML validations
-    if (from.invalid) {
+  onAddPost(form: NgForm) {
+    //some basic html validation
+    if (form.invalid) {
       return;
     }
-   
-    this.postsService.addPost(from.value.title, from.value.content)
+    //add the posts
+    this.postsService.addPost(form.value.title, form.value.content);
+    //reset the post tempelate for the next post
+    form.resetForm();
   }
 }
