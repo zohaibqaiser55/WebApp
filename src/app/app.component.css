@@ -1,4 +1,6 @@
 main{
     /** adding some space between the toolbar and the txt field **/
     margin-top: 1 rem;
+    width: 85%;
+    margin: 1 rem;
 }
