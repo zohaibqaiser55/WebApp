@@ -5,8 +5,11 @@ import { Component } from '@angular/core';
     templateUrl: './post-create.component.html'
 })
 export class PostCreateComponent {
+
+    enteredValue ='';
+    newPost = 'No Content';
     //A fuction that will learn when someone click the button in html file(action)
-    onAddPost(){
-        alert('Post created')
+    onAddPost(postInput: HTMLTextAreaElement){
+        this.newPost = this.enteredValue;
     }
 }
