@@ -1,8 +1,13 @@
+const mongoose = require("mongoose");
 const express = require("express");
 const bodyParser = require("body-parser");
 
+//instense of express()
 const app = express();
+//instense of the import model
 const Book = require('./models/book');
+
+
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false}))
