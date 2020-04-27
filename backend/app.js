@@ -2,6 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 
 const app = express();
+const Book = require('./models/book');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false}))
@@ -25,12 +26,18 @@ app.use((req, res, next) => {
 
 //this (back end point ) route will be used to post the data
 app.post("/api/book",(req, res, next) => {
-  const posts = req.body;
-  console.log();
+  //creating an instance of the model
+  const book = new Book({
+    //passing the values
+    title: req.body.title,
+    content: req.body.content
+  });
+  //outputting the submitted book data
+  console.log(book);
   //ok code to show that post for the book was created
-  res.status(201).jaso({
+  res.status(201).json({
     message : 'You have successfully created a post'
-  })
+  });
 }) ;
 
 //to get the data from back end to front end
