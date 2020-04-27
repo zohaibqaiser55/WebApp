@@ -7,19 +7,20 @@ import {MatButtonModule} from '@angular/material/button';
 import { AppComponent } from './app.component';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatExpansionModule} from '@angular/material/expansion';
+import {HttpClientModule} from "@angular/common/http"
 
 
-
-import {PostCreateComponent} from './posts/post-create/post-create.component';
+//local imports
+import {BookCreateComponent} from './books/book-create/book-create.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { HeaderComponent} from "./header/header.component"
-import { PostListComponent } from './posts/post-list/post-list.component';
+import { BookListComponent } from './books/book-list/book-list.component';
 
 @NgModule({
   declarations: [
     //declaring so can use the components that i created 
     AppComponent,
-    PostCreateComponent,HeaderComponent,PostListComponent
+    BookCreateComponent,HeaderComponent,BookListComponent
   ],
   imports: [
     //all the material components that we import for styling the front end
@@ -30,7 +31,8 @@ import { PostListComponent } from './posts/post-list/post-list.component';
     MatCardModule,
     MatButtonModule,
     MatToolbarModule,
-    MatExpansionModule
+    MatExpansionModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

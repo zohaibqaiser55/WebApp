@@ -1,15 +1,15 @@
 import { Component,OnInit, OnDestroy } from "@angular/core";
 import { Post} from "../post.model";
-import { PostsService} from "../post.service"
+import { PostsService} from "../book.service"
 import { Subscription } from 'rxjs';
 
 //components for handing(using) the class
 @Component({
   selector: "app-post-list",
-  templateUrl: "./post-list.component.html",
-  styleUrls: ["./post-list.component.css"]
+  templateUrl: "./book-list.component.html",
+  styleUrls: ["./book-list.component.css"]
 })
-export class PostListComponent implements OnInit,OnDestroy {
+export class BookListComponent implements OnInit,OnDestroy {
   
 
   posts: Post[]= [];
@@ -21,7 +21,7 @@ export class PostListComponent implements OnInit,OnDestroy {
 
    ngOnInit() {
     //will fetch all the hosts
-    this.posts = this.postsService.getPosts();
+    this.postsService.getPosts();
     this.postsService.getPostUpdateListener().subscribe((posts: Post[]) => {
       this.posts = posts;
     });

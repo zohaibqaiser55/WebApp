@@ -2,20 +2,20 @@ import { Component } from "@angular/core";
 import { NgForm } from '@angular/forms';
 
 
-import { PostsService } from "../post.service";
-import { format } from 'path';
+import { PostsService } from "../book.service";
+
 
 
 @Component({
   //paths to the file (components)
-  selector: "app-post-create",
+  selector: "app-book-create",
   //template of the post view
-  templateUrl: "./post-create.component.html",
+  templateUrl: "./book-create.component.html",
   //styling shit for the above HTML file
-  styleUrls: ["./post-create.component.css"]
+  styleUrls: ["./book-create.component.css"]
 })
 
-export class PostCreateComponent {
+export class BookCreateComponent {
   enteredTitle = "";
   enteredContent = "";
   

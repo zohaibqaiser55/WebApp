@@ -24,7 +24,7 @@ export class PostsService{
 //method for adding new post
  addPost(title: string, content: string) {
      //new variable of type, Post
-    const post: Post = {title: title, content: content};
+    const post: Post = {id: null, title: title, content: content};
     //after posting it will add the new value(post) in the array [...this.posts])
     this.posts.push(post);
     this.postsUpdated.next([...this.posts]);
