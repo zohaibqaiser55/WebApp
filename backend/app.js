@@ -1,13 +1,23 @@
 const mongoose = require("mongoose");
 const express = require("express");
 const bodyParser = require("body-parser");
+require('dotenv').config();
 
 //instense of express()
 const app = express();
 //instense of the import model
 const Book = require('./models/book');
 
-
+//connecting to Data Base while the credentials of the data base is hidden
+mongoose.connect(process.env.MONGO_URL )
+.then(() => 
+  {console.log('Online DataBase is Ready')
+ })
+ .catch(() =>{
+  console.log
+    ('Error occured, During Connecting to DataBase. Pls check the database.js File' );
+  }
+);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false}))
@@ -37,8 +47,8 @@ app.post("/api/book",(req, res, next) => {
     title: req.body.title,
     content: req.body.content
   });
-  //outputting the submitted book data
-  console.log(book);
+  //saving the data in database
+  book.save();
   //ok code to show that post for the book was created
   res.status(201).json({
     message : 'You have successfully created a post'
