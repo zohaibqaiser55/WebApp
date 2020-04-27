@@ -35,6 +35,15 @@ export class PostsService{
  addPost(title: string, content: string) {
     //new variable of type, Post
     const post: Post = {id: null, title: title, content: content};
+    this.http.post<{message: string}>('http://localhost:3000/api/book', post)
+      .subscribe((resData) =>{
+      //Displaying the Data in console log
+      console.log(resData.message);
+      //we will push the new post in the local variabl only if the above above request works
+      //only if the above post request works
+        this.posts.push(post);
+        this.postsUpdated.next([...this.posts]);
+        });
     //after posting it will add the new value(post) in the array [...this.posts])
     this.posts.push(post);
     this.postsUpdated.next([...this.posts]);

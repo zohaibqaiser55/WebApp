@@ -53,5 +53,6 @@ app.set("port", port);
 const server = http.createServer(app);
 // listner used when error occured
 server.on("error", onError);
+
 server.on("listening", onListening);
 server.listen(port);
