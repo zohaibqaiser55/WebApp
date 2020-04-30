@@ -57,22 +57,15 @@ app.post("/api/book",(req, res, next) => {
 
 //to get the data from back end to front end
 app.get("/api/book", (req, res, next) => {
-  const posts = [
-    {
-      id: "fadf12421l",
-      title: "First server-side post",
-      content: "This is coming from the server"
-    },
-    {
-      id: "ksajflaj132",
-      title: "Second server-side post",
-      content: "This is coming from the server!"
-    }
-  ];
-  res.status(200).json({
-    message: "Posts fetched succesfully!",
-    posts: posts
-  });
+  Book.find()
+    .then(document => {
+      console.log(document);
+      res.status(200).json({
+        message: "Posts fetched succesfully!",
+        posts: document
+      });
+    });
+ 
 });
 
 module.exports = app;

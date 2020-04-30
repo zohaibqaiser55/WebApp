@@ -43,9 +43,9 @@ export class PostsService{
       //only if the above post request works
         this.posts.push(post);
         this.postsUpdated.next([...this.posts]);
+        
         });
-    //after posting it will add the new value(post) in the array [...this.posts])
-    this.posts.push(post);
-    this.postsUpdated.next([...this.posts]);
+    
+    
   }
 }
