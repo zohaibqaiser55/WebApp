@@ -49,12 +49,16 @@ app.post("/api/book",(req, res, next) => {
     content: req.body.content
   });
   //saving the data in database
-  book.save();
-  //ok code to show that post for the book was created
-  res.status(201).json({
-    message : 'You have successfully created a post'
+  book.save().then(createdPost => {
+    console.log(createdPost)
+    res.status(201).json({ 
+    //ok code to show that post for the book was created
+    message: "Post added successfully",
+    postId: createdPost._id
+    });
   });
-}) ;
+ 
+  });
 
 //to get the data from back end to front end
 app.get("/api/book", (req, res, next) => {
