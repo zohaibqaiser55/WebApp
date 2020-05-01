@@ -17,7 +17,7 @@ export class PostsService{
   //injecting http client functionality through constructor
  constructor(private http: HttpClient) {}
 
- //getting the value from the server
+ //getting the data from the server
  getPosts(){
   //specifying that which type of data we wil get 
   this.http.get<{message: string, posts: any}>('http://localhost:3000/api/book')
@@ -36,14 +36,12 @@ export class PostsService{
     this.postsUpdated.next([...this.posts]);
   });
 }
-
- 
  getPostUpdateListener() {
     return this.postsUpdated.asObservable();
   }
 
-//method for adding new posts (book data)
- addPost(title: string, content: string) {
+ //method for adding new posts (book data)
+  addPost(title: string, content: string) {
     //new variable of type, Post
     const post: Post = {id: null, title: title, content: content};
     this.http.post<{message: string}>('http://localhost:3000/api/book', post)
@@ -55,8 +53,12 @@ export class PostsService{
         this.posts.push(post);
         this.postsUpdated.next([...this.posts]);
         
-        });
-    
-    
+      });
+  }
+  deletePost(postId: string) {
+    this.http.delete("http://localhost:3000/api/book/" + postId)
+      .subscribe(() => {
+        console.log('you deleted that ');
+      });
   }
 }

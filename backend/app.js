@@ -39,6 +39,7 @@ app.use((req, res, next) => {
   next();
 });
 
+
 //this (back end point ) route will be used to post the data
 app.post("/api/book",(req, res, next) => {
   //creating an instance of the model
@@ -59,7 +60,6 @@ app.post("/api/book",(req, res, next) => {
 app.get("/api/book", (req, res, next) => {
   Book.find()
     .then(document => {
-      console.log(document);
       res.status(200).json({
         message: "Posts fetched succesfully!",
         posts: document
@@ -68,4 +68,13 @@ app.get("/api/book", (req, res, next) => {
  
 });
 
+// to delete the data from data base using the id of the post
+app.delete("/api/book/:id", (req, res, next) => {
+  Book.deleteOne({_id: req.params.id}).then(result => {
+    console.log(result);
+    res.status(200).json({message: "gone"})
+  })
+
+  
+});
 module.exports = app;

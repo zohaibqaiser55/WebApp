@@ -16,17 +16,23 @@ export class BookListComponent implements OnInit,OnDestroy {
   private postsSub: Subscription;
   
 
-  // will be used to updated the list (through update method in post.service)
+  // will be used to updated the list (through update method in book.service)
   constructor(public postsService :PostsService){}
 
    ngOnInit() {
     //will fetch all the hosts
     this.postsService.getPosts();
-    this.postsService.getPostUpdateListener().subscribe((posts: Post[]) => {
+    this.postsService.getPostUpdateListener()
+    .subscribe((posts: Post[]) => {
       this.posts = posts;
     });
-
   }
+
+  //Method to delete the Book post by using the ID of the post 
+  onDelete(postId: string) {
+    this.postsService.deletePost(postId);
+  }
+
   //this will be called when ever the above method(components) end to avoid the memory breach
   ngOnDestroy() {
     this.postsSub.unsubscribe();
