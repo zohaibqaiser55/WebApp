@@ -3,8 +3,11 @@ const express = require("express");
 const bodyParser = require("body-parser");
 require('dotenv').config();
 
-//importing the Books file from routes folder which have all the routes
+//importing the Books file functionality from routes folder which have all the routes
 const booksRoutes = require("./routes/books")
+//making an instance that will connect the app.js with controller file
+const BookController = require("../controllers/books");
+
 //instense of express()
 const app = express();
 
