@@ -37,9 +37,15 @@ export class PostsService{
   });
 }
 
- getPostUpdateListener() {
-    return this.postsUpdated.asObservable();
-  }
+
+getPostUpdateListener() {
+  return this.postsUpdated.asObservable();
+}
+
+getPost(id: string) {
+  return { ...this.posts.find(p => p.id === id) };
+}
+
 
  //method for adding new posts (book data)
   addPost(title: string, content: string) {
@@ -54,6 +60,16 @@ export class PostsService{
       this.postsUpdated.next([...this.posts]);
     });
   }
+  
+  //update the exsistence review
+  updateReview(id: string, title: string, content: string) {
+    const book: Post = { id: id, title: title, content: content };
+    this.http
+      .put("http://localhost:3000/api/book/" + id, book)
+      .subscribe(response => console.log(response));
+  }
+
+  //method to delete the review
   deletePost(postId: string) {
     this.http.delete("http://localhost:3000/api/book/" + postId)
     .subscribe(() => {

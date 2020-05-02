@@ -1,8 +1,9 @@
-import { Component } from "@angular/core";
+import { Component , OnInit} from "@angular/core";
 import { NgForm } from '@angular/forms';
-
+import { ActivatedRoute, ParamMap } from '@angular/router';
 
 import { PostsService } from "../book.service";
+import { Post } from "../post.model";
 
 
 
@@ -15,20 +16,45 @@ import { PostsService } from "../book.service";
   styleUrls: ["./book-create.component.css"]
 })
 
-export class BookCreateComponent {
+export class BookCreateComponent implements OnInit {
   enteredTitle = "";
   enteredContent = "";
-  
+  private mode = "create";
+  private reviewId: string;
+  post: Post;
 
-  constructor(public postsService: PostsService) {}
 
-  onAddPost(form: NgForm) {
+  constructor(public postsService: PostsService, 
+  public route: ActivatedRoute) {}
+
+  ngOnInit() {
+    this.route.paramMap.subscribe((paramMap: ParamMap) => {
+      //checking if user is wrirting a new review or updating the old one
+      if (paramMap.has("reviewId")) {
+        this.mode = "edit";
+        this.reviewId = paramMap.get("reviewId");
+        this.post = this.postsService.getPost(this.reviewId);
+      } else {
+        this.mode = "create";
+        this.reviewId = null;
+      }
+    });
+  }
+
+  onSaveReview(form: NgForm) {
     //some basic html validation
     if (form.invalid) {
       return;
     }
-    //add the posts
-    this.postsService.addPost(form.value.title, form.value.content);
+    if (this.mode === 'create'){
+     //add the posts
+     this.postsService.addPost(form.value.title, form.value.content);
+    }
+    else{
+      //updates the review/post
+      this.postsService.updateReview(this.reviewId ,form.value.title, form.value.content)
+    }
+   
     //reset the post tempelate for the next post
     form.resetForm();
   }

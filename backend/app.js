@@ -33,7 +33,7 @@ app.use((req, res, next) => {
   );
   res.setHeader(
     "Access-Control-Allow-Methods",
-    "GET, POST, PATCH, DELETE, OPTIONS"
+    "GET, POST, PATCH, PUT, DELETE, OPTIONS"
   );
   //jumping to next fuction//route
   next();
@@ -60,8 +60,23 @@ app.post("/api/book",(req, res, next) => {
  
   });
 
-//to get the data from back end to front end
-app.get("/api/book", (req, res, next) => {
+ //this is used to update the review/post 
+ app.put("/api/book/:id", (req, res, next) => {
+   //putting the received value in to the local varaible 
+    const post = new Book({
+      _id: req.body.id,
+      title: req.body.title,
+      content: req.body.content
+    });
+    //updated the review 
+    Book.updateOne({ _id: req.params.id }, post).then(result => {
+      console.log(result);
+      res.status(200).json({ message: "Update successful!" });
+    });
+ });
+  
+ //to get the data from back end to front end
+ app.get("/api/book", (req, res, next) => {
   Book.find()
     .then(document => {
       res.status(200).json({
@@ -70,10 +85,10 @@ app.get("/api/book", (req, res, next) => {
       });
     });
  
-});
+ });
 
-// to delete the data from data base using the id of the post
-app.delete("/api/book/:id", (req, res, next) => {
+ // to delete the data from data base using the id of the post
+ app.delete("/api/book/:id", (req, res, next) => {
   Book.deleteOne({_id: req.params.id}).then(result => {
     console.log(result);
     res.status(200).json({message: "gone"})
@@ -81,4 +96,4 @@ app.delete("/api/book/:id", (req, res, next) => {
 
   
 });
-module.exports = app;
+ module.exports = app;
