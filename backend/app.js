@@ -1,3 +1,4 @@
+const path = require("path");
 const mongoose = require("mongoose");
 const express = require("express");
 const bodyParser = require("body-parser");
@@ -6,7 +7,7 @@ require('dotenv').config();
 //importing the Books file functionality from routes folder which have all the routes
 const booksRoutes = require("./routes/books")
 //making an instance that will connect the app.js with controller file
-const BookController = require("../controllers/books");
+const BookController = require("./controllers/review");
 
 //instense of express()
 const app = express();
@@ -23,6 +24,7 @@ const app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false}))
+app.use("/", express.static(path.join(__dirname, "angular")));
 
 //to solve the issue of CORS
 app.use((req, res, next) => {
@@ -42,5 +44,8 @@ app.use((req, res, next) => {
 //calling/ using the routes file
 //also filtering that any requeat with path /api/book will be able to get access to the routing file 
 app.use("/api/book",booksRoutes);
+app.use((req, res, next) => {
+  res.sendFile(path.join(__dirname, "angular", "index.html"));
+});
 
 module.exports = app;
