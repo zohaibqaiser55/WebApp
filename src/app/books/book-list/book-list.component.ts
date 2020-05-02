@@ -35,7 +35,7 @@ export class BookListComponent implements OnInit,OnDestroy {
 
   //this will be called when ever the above method(components) end to avoid the memory breach
   ngOnDestroy() {
-    this.postsSub.unsubscribe();
+   // this.postsSub.unsubscribe();
   }
   
 }

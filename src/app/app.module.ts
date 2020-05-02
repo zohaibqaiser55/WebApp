@@ -15,6 +15,7 @@ import {BookCreateComponent} from './books/book-create/book-create.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { HeaderComponent} from "./header/header.component"
 import { BookListComponent } from './books/book-list/book-list.component';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { BookListComponent } from './books/book-list/book-list.component';
   imports: [
     //all the material components that we import for styling the front end
     BrowserModule,
+    AppRoutingModule,
     FormsModule,
     BrowserAnimationsModule,
     MatInputModule,

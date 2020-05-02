@@ -1,2 +1,12 @@
-
-<mat-toolbar color="primary">Welcome to Book Land</mat-toolbar>
+<mat-toolbar color="primary">
+    <span>
+      <a routerLink="/">Reviews</a>
+    </span>
+    <span class="spacer"></span>
+    <ul>
+      <li>
+        <a mat-button routerLink="/create" routerLinkActive="mat-accent">Write a Review</a>
+      </li>
+    </ul>
+  </mat-toolbar>
+  
