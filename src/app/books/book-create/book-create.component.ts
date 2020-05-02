@@ -33,7 +33,10 @@ export class BookCreateComponent implements OnInit {
       if (paramMap.has("reviewId")) {
         this.mode = "edit";
         this.reviewId = paramMap.get("reviewId");
-        this.post = this.postsService.getPost(this.reviewId);
+        this.postsService.getPost(this.reviewId).subscribe(reviewData =>{
+          this.post = {id: reviewData._id, title: reviewData.title, content: reviewData.content}
+
+        });
       } else {
         this.mode = "create";
         this.reviewId = null;

@@ -42,8 +42,11 @@ getPostUpdateListener() {
   return this.postsUpdated.asObservable();
 }
 
+//will search for the Review/post id that we want to edit/update
 getPost(id: string) {
-  return { ...this.posts.find(p => p.id === id) };
+  return this.http.get<{ _id: string; title: string; content: string }>(
+    "http://localhost:3000/api/book/" + id
+  );
 }
 
 
@@ -66,8 +69,15 @@ getPost(id: string) {
     const book: Post = { id: id, title: title, content: content };
     this.http
       .put("http://localhost:3000/api/book/" + id, book)
-      .subscribe(response => console.log(response));
-  }
+      .subscribe(response => {
+        const updatedPosts = [...this.posts];
+        const oldPostIndex = updatedPosts.findIndex(p => p.id === book.id);
+        updatedPosts[oldPostIndex] = book;
+        this.posts = updatedPosts;
+        this.postsUpdated.next([...this.posts]);
+        //this.router.navigate(["/"]);
+      });
+    }
 
   //method to delete the review
   deletePost(postId: string) {
